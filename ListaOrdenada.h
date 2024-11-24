@@ -17,8 +17,9 @@ typedef struct {
 } REGISTRO;
 
 typedef struct {
-  REGISTRO A[MAX+1];
+  REGISTRO* A;
   int nroElem;
+  int capacidade;
 } LISTA;
 
 // Declaração das funções
