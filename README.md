@@ -11,8 +11,7 @@ Reduzir a Capacidade:
 
 Quando o número de elementos na lista cai para 25% da capacidade atual, a lista deve reduzir sua capacidade para metade, liberando memória desnecessária.
 
-Detalhes Relevantes para o Funcionamento do Código
-Estrutura de Dados:
+Detalhes Relevantes para o Funcionamento do Código:
 
 A lista é representada por um array dinâmico e gerenciada através de uma estrutura (LISTA) que contém:
 Um ponteiro para o array dinâmico (A).
