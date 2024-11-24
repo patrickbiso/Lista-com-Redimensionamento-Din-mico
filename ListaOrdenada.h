@@ -2,6 +2,7 @@
 #ifndef LISTA_SEQUENCIAL_ORDENADA_H
 #define LISTA_SEQUENCIAL_ORDENADA_H
 
+#include <stdlib.h>
 #include <stdio.h>
 #define MAX 50
 #define ERRO -1
