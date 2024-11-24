@@ -5,6 +5,8 @@
 /* Inicialização da lista sequencial (a lista já está criada e é apontada pelo endereço em l) */
 void inicializarLista(LISTA* l){
   l->nroElem = 0;
+  l->capacidade = 50;
+  l->A = (REGISTRO*)malloc(l->capacidade * sizeof(REGISTRO));
 } /* inicializarLista */
 
 
