@@ -122,15 +122,18 @@ bool excluirElemLista(LISTA* l, TIPOCHAVE ch) {
 } /* excluirElemLista */
 
 
-/* Exclusão do elemento cuja chave seja igual a ch em lista ordenada*/
+
 bool excluirElemListaOrd(LISTA* l, TIPOCHAVE ch) { 
-  int pos, j;
-  pos = buscaBinaria(l,ch);
-  if(pos == ERRO) return false; // não existe
-  for(j = pos; j < l->nroElem-1; j++) l->A[j] = l->A[j+1];
-  l->nroElem--;
-  return true;
-} /* excluirElemListaOrd */
+ int pos = buscaSequencial(l, ch);
+ if (pos == ERRO) return false;
+ for (int j = pos; j < l->nroElem - 1; j++) l->A[j] = l->A[j + 1];
+ l->nroElem--;
+
+ if (l->nroElem > 0 && l->nroElem <= l->capacidade / 4) {
+  redimensionarLista(l, l->capacidade /2);
+ }
+ return true;
+ } 
 
 
 bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
