@@ -1,60 +1,38 @@
-// main.c
 #include "ListaOrdenada.h"
 
 int main() {
-  LISTA lista;
-  REGISTRO reg;
+    LISTA lista;
+    REGISTRO reg;
 
-  // Inicializar a lista
-  inicializarLista(&lista);
+    // Inicializar a lista
+    inicializarLista(&lista);
 
-  // Exibir lista vazia
-  exibirLista(&lista);
-  printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
-  printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
+    // Teste 1: Inserção até ultrapassar a capacidade inicial 
+    printf("Teste de inserção até capacidade inicial (50 elementos):\n");
+    for (int i = 1; i <= 60; i++) {
+        reg.chave = i;
+        inserirElemListaOrd(&lista, reg);  
+    }
+    exibirLista(&lista);  
+    printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
+    printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
 
-  // Inserir elementos na lista
-  reg.chave = 9;
-  inserirElemListaOrd(&lista, reg);
-  reg.chave = 3;
-  inserirElemListaOrd(&lista, reg);
-  reg.chave = 4;
-  inserirElemListaOrd(&lista, reg);
-  reg.chave = 1;
-  inserirElemListaOrd(&lista, reg);
-  reg.chave = 12;
-  inserirElemListaOrd(&lista, reg);
+    // Teste 2: Remoção até reduzir a capacidade 
+    printf("\nTeste de remoção até reduzir capacidade:\n");
+    for (int i = 60; i >= 1; i--) {
+        excluirElemLista(&lista, i);  
+    }
+    exibirLista(&lista);  
+    printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
+    printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
 
-  // Exibir lista após inserções
-  exibirLista(&lista);
-  printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
-  printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
+    // Teste 3: Reinicialização da lista
+    printf("\nTeste de reinicialização da lista:\n");
+    reinicializarLista(&lista);  
+    exibirLista(&lista);  
+    printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
+    printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
 
-  // Buscar um elemento na lista
-  int pos = buscaSequencial(&lista, 4);
-  printf("Chave 4 encontrada na posicao: %i do arranjo A.\n", pos);
-  
-  pos = buscaBinaria(&lista, 4);
-  printf("Chave 4 encontrada na posicao: %i do arranjo A.\n", pos);
-  
-  pos = buscaSentinela(&lista, 4);
-  printf("Chave 4 encontrada na posicao: %i do arranjo A.\n", pos);
-
-  // Excluir alguns elementos da lista
-  if (excluirElemLista(&lista, 4)) printf("Exclusao bem sucedida: 4.\n");
-  if (excluirElemLista(&lista, 8)) printf("Exclusao bem sucedida: 8 (não existe na lista).\n");
-  if (excluirElemLista(&lista, 9)) printf("Exclusao bem sucedida: 9.\n");
-
-  // Exibir lista após exclusões
-  exibirLista(&lista);
-  printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
-  printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
-
-  // Reinicializar a lista
-  reinicializarLista(&lista);
-  exibirLista(&lista);
-  printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
-  printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
-
-  return 0;
+    return 0;
 }
+

@@ -10,6 +10,7 @@ void inicializarLista(LISTA* l) {
 } /* inicializarLista */
 
 void redimensionarLista(LISTA* l, int novaCapacidade) {
+  if (novaCapacidade < l->nroElem) return;
   l->A = (REGISTRO*)realloc(l->A, novaCapacidade * sizeof(REGISTRO));
   l->capacidade = novaCapacidade;
 }
@@ -28,13 +29,9 @@ int tamanho(LISTA* l) {
   return l->nroElem;
 } /* tamanho */
 
-/* Retornar o tamanho em bytes da lista. Neste caso, isto nao depende do numero
-   de elementos que estao sendo usados, pois a alocacao de memoria eh estatica.
-   A priori, nao precisariamos do ponteiro para a lista, vamos utiliza-lo apenas
-   porque teremos as mesmas funcoes para listas ligadas.   
-*/
+
 int tamanhoEmBytes(LISTA* l) {
-  return sizeof(LISTA);
+  return sizeof(LISTA) + (l->capacidade * sizeof(REGISTRO));
 } /* tamanhoEmBytes */
 
 /* Retornar a chave do primeiro elemento da lista sequencial (caso haja) e ERRO
