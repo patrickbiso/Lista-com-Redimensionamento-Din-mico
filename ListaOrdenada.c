@@ -10,10 +10,16 @@ void inicializarLista(LISTA* l) {
 } /* inicializarLista */
 
 void redimensionarLista(LISTA* l, int novaCapacidade) {
-  if (novaCapacidade < l->nroElem) return;
-  l->A = (REGISTRO*)realloc(l->A, novaCapacidade * sizeof(REGISTRO));
-  l->capacidade = novaCapacidade;
+    
+    if (novaCapacidade < l->nroElem) {
+        return; 
+    }
+    
+    l->A = (REGISTRO*)realloc(l->A, novaCapacidade * sizeof(REGISTRO));
+    l->capacidade = novaCapacidade;
 }
+
+
 
 /* Exibição da lista sequencial */
 void exibirLista(LISTA* l){
@@ -31,8 +37,10 @@ int tamanho(LISTA* l) {
 
 
 int tamanhoEmBytes(LISTA* l) {
-  return sizeof(LISTA) + (l->capacidade * sizeof(REGISTRO));
-} /* tamanhoEmBytes */
+    return sizeof(LISTA) + (l->capacidade * sizeof(REGISTRO));
+}
+
+
 
 /* Retornar a chave do primeiro elemento da lista sequencial (caso haja) e ERRO
    caso a lista esteja vazia */
@@ -57,9 +65,12 @@ TIPOCHAVE enesimoElem(LISTA* l, int n) {
 
 /* Reinicializar a estrutura */
 void reinicializarLista(LISTA* l) {
-  free(l ->A);
-  inicializarLista(l);
-} /* reinicializarLista */
+    free(l->A);  
+    l->A = (REGISTRO*)malloc(50 * sizeof(REGISTRO)); 
+    l->capacidade = 50;  
+    l->nroElem = 0;  
+}
+
 
 
 /* Busca sequencial em lista ordenada ou não SEM SENTINELA */
@@ -109,15 +120,23 @@ int buscaBinaria(LISTA* l, TIPOCHAVE ch){
 } /* buscaBinaria */
 
 
-/* Exclusão do elemento cuja chave seja igual a ch */
-bool excluirElemLista(LISTA* l, TIPOCHAVE ch) { 
-  int pos, j;
-  pos = buscaSequencial(l,ch);
-  if(pos == ERRO) return false; // não existe
-  for(j = pos; j < l->nroElem-1; j++) l->A[j] = l->A[j+1];
-  l->nroElem--;
-  return true;
-} /* excluirElemLista */
+bool excluirElemLista(LISTA* l, TIPOCHAVE ch) {
+    int pos = buscaSequencial(l, ch);
+    if (pos == ERRO) return false;
+
+    
+    for (int j = pos; j < l->nroElem - 1; j++) {
+        l->A[j] = l->A[j + 1];
+    }
+    l->nroElem--;
+
+    
+    if (l->nroElem <= l->capacidade / 4) {
+        redimensionarLista(l, l->capacidade / 2);
+    }
+
+    return true;
+}
 
 
 

@@ -7,9 +7,14 @@ int main() {
     // Inicializar a lista
     inicializarLista(&lista);
 
+    printf("Demonstração de eleemntos e tamanho inicial da lista:\n");
+    exibirLista(&lista);  // Lista inicialmente
+    printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
+    printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
+
     // Teste 1: Inserção até ultrapassar a capacidade inicial 
-    printf("Teste de inserção até capacidade inicial (50 elementos):\n");
-    for (int i = 1; i <= 60; i++) {
+    printf("Teste de inserção até superar a capacidade inicial (50 elementos):\n");
+    for (int i = 1; i <= 101; i++) {
         reg.chave = i;
         inserirElemListaOrd(&lista, reg);  
     }
@@ -17,8 +22,8 @@ int main() {
     printf("Numero de elementos na lista: %i.\n", tamanho(&lista));
     printf("Tamanho da lista (em bytes): %i.\n", tamanhoEmBytes(&lista));
 
-    // Teste 2: Remoção até reduzir a capacidade 
-    printf("\nTeste de remoção até reduzir capacidade:\n");
+    
+    printf("\nTeste de remoção até reduzir capacidade para 25 por cento (E reduzir a lista para metade):\n");
     for (int i = 60; i >= 1; i--) {
         excluirElemLista(&lista, i);  
     }
