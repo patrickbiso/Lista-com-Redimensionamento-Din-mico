@@ -133,18 +133,22 @@ bool excluirElemListaOrd(LISTA* l, TIPOCHAVE ch) {
 } /* excluirElemListaOrd */
 
 
-/* Inserção em lista ordenada usando busca binária permitindo duplicação */
 bool inserirElemListaOrd(LISTA* l, REGISTRO reg) {
-  if(l->nroElem >= MAX) return false; // lista cheia
-  int pos = l->nroElem;
-  while(pos > 0 && l->A[pos-1].chave > reg.chave) {
-    l->A[pos] = l->A[pos-1];
-    pos--;
+  if(l->nroElem >= l->capacidade) {
+    redimensionarLista(l, l->capacidade*2);
   }
-  l->A[pos] = reg;
-  l->nroElem++;
-  return true;
-} /* inserirElemListaOrd */
+
+int pos = l->nroElem;
+while (pos > 0 && l->A[pos-1].chave > reg.chave) {
+  l->A[pos] = l->A[pos - 1];
+  pos--;
+}
+
+l->A[pos] = reg;
+l->nroElem++;
+return true;
+
+} 
 
 
 
