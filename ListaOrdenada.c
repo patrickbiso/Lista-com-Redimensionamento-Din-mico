@@ -60,7 +60,8 @@ TIPOCHAVE enesimoElem(LISTA* l, int n) {
 
 /* Reinicializar a estrutura */
 void reinicializarLista(LISTA* l) {
-  l->nroElem = 0;
+  free(l ->A);
+  inicializarLista(l);
 } /* reinicializarLista */
 
 
