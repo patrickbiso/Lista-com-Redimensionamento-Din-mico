@@ -9,6 +9,10 @@ void inicializarLista(LISTA* l) {
   l->A = (REGISTRO*)malloc(l->capacidade * sizeof(REGISTRO));
 } /* inicializarLista */
 
+void redimensionarLista(LISTA* l, int novaCapacidade) {
+  l->A = (REGISTRO*)realloc(l->A, novaCapacidade * sizeof(REGISTRO));
+  l->capacidade = novaCapacidade;
+}
 
 /* Exibição da lista sequencial */
 void exibirLista(LISTA* l){
